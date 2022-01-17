@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact | eCoder{% endblock title %}
+
+{% block body %}
+<div class="container my-3">
+<h3 class="text-center">Contact eCoder Admin</h3>
+<form method="post">
+{% csrf_token %}
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" name="name" aria-describedby="name" required="true">
+  </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required="true">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="content">Describe your issue :</label>
+    <textarea class="form-control" name="content" id="content" cols="30" rows="5" required="true"></textarea>
+  </div>
+
+  <div class="text-center"><button type="submit" class="btn btn-primary my-2">Submit</button></div>
+</form>
+</div>
+{% endblock %}

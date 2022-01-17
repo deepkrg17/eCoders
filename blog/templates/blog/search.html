@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %} Search | eCoder {% endblock %}
+
+{% block body %}
+<div class="container my-2">
+    <h3 class="mx-2">Search results: </h3>
+    
+    <div class="row mb-2">
+    {% for post in results %}
+        <div class="col-md-6">
+            <div class="border rounded overflow-hidden mb-4 shadow-sm p-3 d-flex flex-column">
+                <strong class="d-inline-block mb-2 text-primary">Article by {{post.author}}</strong>
+                <h3 class="mb-0">{{post.title}}</h3>
+                <small class="text-muted">{{post.timeStamp}}</small>
+                <div class="card-text mb-auto preview">{{post.content|safe|truncatechars:180}}</div>
+                <a href="/posts/{{post.slug}}">Continue reading</a>
+            </div>
+        </div>
+    {% if forloop.counter|divisibleby:2 and not forloop.last%}
+    </div>
+    <div class="row mb-2">
+    {% endif %}
+    {% empty %}
+    <p class="m-2">Sorry, No matches found for "<strong class="text-break">{{query}}</strong>".</p>
+    {% endfor %}
+    </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+    var previews = document.querySelectorAll('.preview');
+    function setPreview(){
+        previews.forEach((elm)=>{
+            elm.innerHTML = elm.innerText;
+        });
+    }
+    window.onload = setPreview();
+</script>
+{% endblock %}
